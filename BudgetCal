@@ -1,0 +1,50 @@
+# Input:
+# - User’s total budget (float).
+# - For each item:
+#   - Item name (string).
+#   - Item price (float).
+#   - Option to continue adding more items (Yes/No).
+
+# Process:
+# - Subtract the item price from the total budget after each entry.
+# - If the budget becomes negative, notify the user that they have exceeded their budget.
+
+# Output:
+# - List of items purchased and their prices.
+# - Total amount spent.
+# - Remaining budget.
+
+total_budget = float(input("Enter your budget: "))
+
+grocery_item = {} #storage of item_name and item_price
+
+item_total = 0
+
+while True:
+   
+    item_name = input("\nEnter item name: ")
+    try:
+        item_price = float(input("Enter item price: "))
+    except ValueError:
+        print("Enter numeric value only")
+        continue
+
+    grocery_item[item_name]= item_price
+    item_total += item_price
+    
+    if item_total > total_budget:
+        print("----You exceed to you total budget---")
+
+    save = input("Do you want to add more (Y/N): ").strip().lower()
+    if save == 'n':
+        break
+
+
+print("\nItems purchased:")
+for i,y in grocery_item.items():
+    print("-",i,":",y)
+
+
+rem_budget = total_budget - item_total
+print("\nTotal spent:","$",item_total)
+print("Remaining budget:","$",rem_budget)
